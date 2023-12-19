@@ -60,6 +60,11 @@ def main():
     fig, ax = plt.subplots(figsize=(20, 8))
     sns.barplot(x='Valor Contrato', y='Agencia', data=grouped_data, ax=ax, orient='h', errorbar=None)
 
+    try:
+    sns.barplot(x='Valor Contrato', y='Agencia', data=grouped_data, ax=ax, orient='h', errorbar=None)
+except Exception as e:
+    print(f"Erro ao criar gráfico de barras: {e}")
+
     # Adiciona os valores em reais no gráfico
     for p in ax.patches:
         value = p.get_width()
