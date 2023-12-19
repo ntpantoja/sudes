@@ -4,11 +4,7 @@ import matplotlib
 matplotlib.use('Agg')  # Use o backend Agg
 import matplotlib.pyplot as plt
 import seaborn as sns
-import locale
 from datetime import datetime
-
-# Configuração para formatar os valores em reais
-locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
 
 # Função para carregar e processar a planilha
 def load_data():
