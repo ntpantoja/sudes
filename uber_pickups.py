@@ -50,41 +50,6 @@ def main():
     if linha_credito_filter:
         data = data[data['Linha de Credito'].str.normalize('NFKD').str.encode('ascii', errors='ignore').str.decode('utf-8').isin(linha_credito_filter)]
 
-    # Gráfico de barras horizontal - Total Valor Contrato por Agencia
-    st.header('Valor Contratado por Agencia')
-
-    # Agrupa os dados por Agencia e calcula a soma dos Valores dos Contratos
-    grouped_data = data.groupby('Agencia')['Valor Contrato'].sum().reset_index()
-
-    # Cria o gráfico de barras horizontais
-    fig, ax = plt.subplots(figsize=(20, 8))
-    sns.barplot(x='Valor Contrato', y='Agencia', data=grouped_data, ax=ax, orient='h', errorbar=None)
-
-    try:
-    sns.barplot(x='Valor Contrato', y='Agencia', data=grouped_data, ax=ax, orient='h', errorbar=None)
-except Exception as e:
-    print(f"Erro ao criar gráfico de barras: {e}")
-
-    # Adiciona os valores em reais no gráfico
-    for p in ax.patches:
-        value = p.get_width()
-        ax.annotate(locale.currency(value, grouping=True), (value, p.get_y() + p.get_height() / 2), xytext=(5, 0), textcoords='offset points', va='center')
-
-    # Remove o título do gráfico de barras
-    ax.set_title('')
-
-    # Remove a grade do gráfico e o quadro em volta das barras
-    ax.grid(False)
-    sns.despine(left=True, bottom=True)
-
-    # Remove título do eixo x
-    ax.set_xlabel('')
-
-    # Remove título do eixo y
-    ax.set_ylabel('')
-
-    st.pyplot(fig)
-
     # Informações Financeiras e Número de Contratos
     st.header('Informações Financeiras e Número de Contratos')
 
